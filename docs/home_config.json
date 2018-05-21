@@ -1,0 +1,153 @@
+{
+    "search": {
+        "searchEngine": {
+            "items": [
+                [
+                    "百度",
+                    "https://www.baidu.com/baidu?wd="
+                ],
+                [
+                    "Bing",
+                    "https://cn.bing.com/search?q="
+                ],
+                [
+                    "Google",
+                    "https://www.google.com/search?q="
+                ]
+            ],
+            "option": "https://www.baidu.com/baidu?wd="
+        },
+        "user": {
+            "name": "Cathor",
+            "homePage": "https://github.com/cathor01"
+        }
+    },
+    "tags": [
+        {
+            "name": "编程",
+            "value": [
+                [
+                    "Unix时间戳",
+                    "http://tool.chinaz.com/?adfwkey=dxc64"
+                ],
+                [
+                    "Unicode编码",
+                    "http://tool.chinaz.com/Tools/unicode.aspx"
+                ],
+                [
+                    "Ping检测",
+                    "http://ping.chinaz.com/"
+                ],
+                [
+                    "AntD",
+                    "http://ant.design/docs/react/introduce-cn"
+                ],
+                [
+                    "JSONProxy",
+                    "https://jsonp.afeld.me/"
+                ],
+                [
+                    "高德API",
+                    "http://lbs.amap.com/api/"
+                ],
+                [
+                    "StackOverflow",
+                    "https://stackoverflow.com/"
+                ],
+                [
+                    "Android框架",
+                    "https://www.cnblogs.com/angrycode/p/5956704.html"
+                ]
+            ]
+        },
+        {
+            "name": "搜索引擎",
+            "value": [
+                [
+                    "百度",
+                    "http://www.baidu.com"
+                ],
+                [
+                    "Google",
+                    "https://www.google.com"
+                ]
+            ]
+        },
+        {
+            "name": "视频",
+            "value": [
+                [
+                    "B站",
+                    "https://bilibili.com"
+                ],
+                [
+                    "A站",
+                    "http://www.acfun.cn/"
+                ],
+                [
+                    "优酷",
+                    "http://youku.com/"
+                ],
+                [
+                    "油管",
+                    "https://www.youtube.com/"
+                ],
+                [
+                    "爱奇艺",
+                    "http://www.iqiyi.com/"
+                ]
+            ]
+        },
+        {
+            "name": "购物",
+            "value": [
+                [
+                    "淘宝",
+                    "https://www.taobao.com/"
+                ],
+                [
+                    "京东",
+                    "https://www.jd.com/"
+                ]
+            ]
+        },
+        {
+            "name": "生活",
+            "value": [
+                [
+                    "微博",
+                    "https://weibo.com"
+                ],
+                [
+                    "知乎",
+                    "https://www.zhihu.com/"
+                ],
+                [
+                    "贴吧",
+                    "https://tieba.baidu.com"
+                ],
+                [
+                    "脸书",
+                    "https://www.facebook.com/"
+                ],
+                [
+                    "Twitter",
+                    "https://twitter.com/home"
+                ]
+            ]
+        },
+        {
+            "name": "存储",
+            "value": [
+                [
+                    "百度云",
+                    "https://pan.baidu.com"
+                ],
+                [
+                    "微云",
+                    "https://www.weiyun.com/disk"
+                ]
+            ]
+        }
+    ]
+}
