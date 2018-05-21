@@ -19,6 +19,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "predeploy":"react-app-rewired build",
+    "deploy":"gh-pages -d build",
     "test": "react-app-rewired test --env=jsdom"
   },
   "devDependencies": {
