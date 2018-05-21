@@ -192,11 +192,11 @@ class App extends Component {
                             ["Bing", "https://cn.bing.com/search?q="],
                             ["Google", "https://www.google.com/search?q="]
                         ],
-                        option: "https://cn.bing.com/search?q="
+                        option: "https://www.baidu.com/baidu?wd="
                     },
                     user: {
                         "name": "Cathor",
-                        "homePage": "http://www.cathor.cn"
+                        "homePage": "https://github.com/cathor01"
                     },
                 },
                 tags: [
