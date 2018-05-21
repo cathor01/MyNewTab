@@ -55,31 +55,31 @@ class App extends Component {
                 newTag: (name, item) => {
                     console.log("App: Add new Tag for " + name);
                     console.log(item);
-                    this.config.search.tags.find(v => v.name === name).value.push(item);
+                    this.config.tags.find(v => v.name === name).value.push(item);
 
                     this.saveConfig();
                 },
                 newRow: (name) => {
                     console.log("App: Add new Row " + name);
 
-                    this.config.search.tags.push({name: name, value: []});
+                    this.config.tags.push({name: name, value: []});
 
                     this.saveConfig();
                 },
                 deleteRow: (name) => {
                     console.log("App: Add new Row " + name);
 
-                    let idx = this.config.search.tags.findIndex((item) => item.name === name);
+                    let idx = this.config.tags.findIndex((item) => item.name === name);
 
                     if (idx > -1) {
-                        this.config.search.tags.splice(idx, 1);
+                        this.config.tags.splice(idx, 1);
                     }
 
                     this.saveConfig();
                 },
                 deleteTag: (rowName, name) => {
                     console.log("App: Add new Row");
-                    let row = this.config.search.tags.find((item) => item.name === rowName);
+                    let row = this.config.tags.find((item) => item.name === rowName);
                     console.log(row);
 
                     if (row !== null) {
