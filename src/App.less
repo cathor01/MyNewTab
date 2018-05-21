@@ -1,0 +1,146 @@
+@import "../node_modules/weather-icons/less/weather-icons";
+
+#root {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+
+  #background {
+    width: 100%;
+    height: 100%;
+
+    background-color: burlywood;
+    background-repeat: no-repeat;
+    background-position: center; //背景图片居中显示，让多余部分相对容器对此展示
+    background-origin: border-box; //从border开始填充
+    background-clip: border-box;
+    background-size: cover;
+    position: fixed;
+  }
+
+  .layout {
+    width: 80%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-items: center;
+
+    justify-content: space-between;
+
+    margin: 0 auto;
+
+    background-color: transparent;
+
+    .pannel-card{
+      width: 45%;
+      min-width: 500px;
+      margin: 24px;
+      height: auto;
+
+      @media(max-width: 1200px) {
+        width: 80%;
+        min-width: 500px;
+        margin: 24px;
+        height: auto;
+      }
+
+      .search-pannel {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        padding: 12px 24px;
+        height: auto;
+
+        .author {
+          align-self: flex-start;
+          display: inline-flex;
+          align-items: center;
+          justify-content: flex-start;
+
+          .place {
+            flex-shrink: 0;
+            font-size: 0.95rem;
+            height: 65%;
+          }
+
+          .date {
+            font-size: 0.75rem;
+            color: gray;
+            height: 45%;
+          }
+        }
+      }
+
+
+      .tag-pannel {
+        width: 100%;
+        display: flex;
+        padding: 12px 24px;
+        flex-direction: column;
+        align-items: center;
+
+
+        .list {
+          width: 100%;
+          font-size: 1.0rem;
+
+          .list-item {
+            width: 100%;
+            padding: 8px 16px;
+          }
+        }
+      }
+
+      .datetime-pannel {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 12px 24px;
+        height: auto;
+
+        .time-text{
+          font-size: 6rem;
+          color: black;
+          text-align: center;
+        }
+
+        .weather-list-item {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-around;
+
+          width: 100%;
+
+          font-size: 1.0rem;
+        }
+      }
+    }
+
+
+    .layout-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      max-height: 100%;
+      padding-bottom: 24px;
+      flex-wrap: wrap;
+      padding-top: 24px;
+
+      @media (max-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding-top: 24px;
+      }
+    }
+  }
+}

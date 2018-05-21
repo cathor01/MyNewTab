@@ -1,0 +1,27 @@
+{
+  "name": "home-page",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.5.2",
+    "base64-js": "^1.3.0",
+    "jquery": "^3.3.1",
+    "react": "^16.3.2",
+    "react-app-rewire-less": "^2.1.1",
+    "react-app-rewired": "^1.5.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4",
+    "react-weathericons": "^1.0.4",
+    "weather-icons": "^2.0.10"
+  },
+  "homepage":".",
+
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom"
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.7.0"
+  }
+}
