@@ -85,7 +85,7 @@ export default class DatetimePannel extends React.Component {
     reloadLocation() {
         this.setState({loading: true});
         $.ajax({
-            url: "http://restapi.amap.com/v3/ip?key=df2f1fa19e465008a0643d67a90e98c0&callback=callback",
+            url: "https://restapi.amap.com/v3/ip?key=df2f1fa19e465008a0643d67a90e98c0&callback=callback",
             type: "GET",
             dataType: "jsonp",
             jsonpCallback: "callback",
@@ -93,7 +93,7 @@ export default class DatetimePannel extends React.Component {
                 console.log(result);
                 this.setState({location: result});
                 $.ajax({
-                    url: "http://restapi.amap.com/v3/weather/weatherInfo?key=df2f1fa19e465008a0643d67a90e98c0&extensions=all&callback=callback&city=" + this.state.location.adcode,
+                    url: "https://restapi.amap.com/v3/weather/weatherInfo?key=df2f1fa19e465008a0643d67a90e98c0&extensions=all&callback=callback&city=" + this.state.location.adcode,
                     type: "GET",
                     dataType: "jsonp",
                     jsonpCallback: "callback",
