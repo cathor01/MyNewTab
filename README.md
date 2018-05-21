@@ -7,7 +7,7 @@
 
 ​	https://pages.cathor.cn (Powered by Github Pages)
 
-####当前版本： 
+#### 当前版本： 
 
 ​	0.1
 
@@ -17,10 +17,9 @@
 2. iPad
 3. 说不定可以在Wallpaper Engine等桌面显示工具中使用？（未测试）
 
-####预览效果：
+#### 预览效果：
 
 ![preview](docs/preview.png)
-
 
 
 #### 使用需求：
@@ -213,10 +212,6 @@
        ]
    }
    ```
-
    
 
-   raw文件见：[home_config][docs/home_config.json]
-
-
-
+   raw文件见：<a href="./docs/home_config.json">home_config</a>
