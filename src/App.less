@@ -1,5 +1,3 @@
-@import "../node_modules/weather-icons/less/weather-icons";
-
 #root {
   width: 100%;
   height: 100%;
@@ -111,6 +109,22 @@
             font-size: 0.75rem;
             color: gray;
             height: 45%;
+          }
+        }
+
+        .search-source {
+          width: 90px;
+
+          @media (max-width: 650px) {
+            width: 80px;
+          }
+        }
+
+        .search-input {
+          width: calc(~"100% - 90px - 32px");
+
+          @media (max-width: 650px) {
+            width: calc(~"100% - 80px - 32px");
           }
         }
       }

@@ -98,8 +98,7 @@ export default class TagPannel extends React.Component {
     render() {
         return (
             <Card hoverable="true" className="pannel-card">
-                <div className="tag-pannel" style={{
-                    }}>
+                <div className="tag-pannel">
                     <div style={{alignSelf: "flex-start", marginBottom: "16px", display: "flex", flexDirection: "row", alignItems: "baseline"}}>
                         <h2 style={{margin: 0, marginRight: 8}}>收藏夹</h2>
                         <Icon type="edit" size="large" onClick={() => {
