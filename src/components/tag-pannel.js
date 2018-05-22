@@ -202,7 +202,8 @@ export default class TagPannel extends React.Component {
                                     display: "flex",
                                     flexDirection: "row",
                                     flexWrap: "wrap",
-                                    alignContent: "flex-start"
+                                    alignItems: "flex-end",
+                                    justifyContent: "flex-end"
                                 }}>{tags}</div>
                             </List.Item>)
                         }}/>
