@@ -227,28 +227,7 @@ class App extends Component {
         if (localStorage.getItem("config") !== null) {
             this.config = JSON.parse(localStorage.getItem("config"));
         } else {
-            this.config = {
-                search: {
-                    searchEngine: {
-                        items: [
-                            ["百度", "https://www.baidu.com/baidu?wd="],
-                            ["搜狗", "https://www.sogou.com/web?query="],
-                            ["Bing", "https://cn.bing.com/search?q="],
-                            ["Google", "https://www.google.com/search?q="]
-                        ],
-                        option: "https://www.sogou.com/web?query="
-                    },
-                    user: {
-                        "name": "Cathor",
-                        "homePage": "https://github.com/cathor01"
-                    },
-                },
-                tags: [
-                ],
-                todo: [
-
-                ],
-            };
+            this.config = {"todo":[{"id":1527003650060,"time":"2018-06-15 14:30","level":"high","desc":"项目系统分析会议","location":"15楼西会议室","status":"undo"},{"id":1527003726505,"time":"2018-06-20 11:00","level":"low","desc":"新人培训计划","location":"5楼东侧工位","status":"undo"},{"id":1527003613708,"time":"2018-06-30 14:30","level":"normal","desc":"XX产品需求分析","location":"12楼东会议室","status":"undo"}],"search":{"searchEngine":{"items":[["百度","https://www.baidu.com/baidu?wd="],["搜狗","https://www.sogou.com/web?query="],["Bing","https://cn.bing.com/search?q="],["Google","https://www.google.com/search?q="]],"option":"https://www.sogou.com/web?query="},"user":{"name":"Cathor","homePage":"https://github.com/cathor01"}},"tags":[{"name":"搜索引擎","value":[["百度","http://www.baidu.com"],["搜狗","https://www.sogou.com/web?query="],["Google","https://www.google.com"]]},{"name":"视频","value":[["B站","https://bilibili.com"],["A站","http://www.acfun.cn/"],["优酷","http://youku.com/"],["油管","https://www.youtube.com/"],["爱奇艺","http://www.iqiyi.com/"]]},{"name":"购物","value":[["淘宝","https://www.taobao.com/"],["京东","https://www.jd.com/"],["天猫","https://www.tmall.com/"]]},{"name":"生活","value":[["微博","https://weibo.com"],["知乎","https://www.zhihu.com/"],["贴吧","https://tieba.baidu.com"],["脸书","https://www.facebook.com/"],["Twitter","https://twitter.com/home"],["QQ空间","https://qzone.qq.com/"]]},{"name":"阅读","value":[["QQ阅读","http://book.qq.com/"],["起点中文","https://www.qidian.com/"]]}]};
             localStorage.setItem("config", JSON.stringify(this.config));
         }
 

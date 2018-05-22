@@ -9,18 +9,22 @@
 
 #### 当前版本： 
 
-​	0.1
+​	0.2
 
 #### 推荐使用场景：
 
-1. 屏幕尺寸大于等于1366 * 768的电脑的现代浏览器（宽度小于1200会进入竖屏显示模式）
+1. 屏幕尺寸大于等于1366 * 768的电脑的现代浏览器（宽度小于1000会进入竖屏显示模式）
 2. iPad
-3. 说不定可以在Wallpaper Engine等桌面显示工具中使用？（未测试）
+3. 手机竖屏使用（横屏也是竖向模式）
+4. 说不定可以在Wallpaper Engine等桌面显示工具中使用？（未测试）
 
 #### 预览效果：
+* 横屏显示：
 
-![preview](docs/preview.png)
+  ![preview](docs/preview.jpg)
+* 竖屏显示：
 
+  ![preview_vertical](docs/vertical_preview.png)
 
 #### 使用需求：
 
@@ -33,7 +37,7 @@
 
 #### 功能介绍：
 
-1. 搜索功能，默认配置了三个搜索选项（百度、Bing、Google）供选择，选择后会保存在localStorage中，可以通过修改配置文件进行额外配置（还有一个User的功能，暂时没做界面，想改去配置文件进行修改）
+1. 搜索功能，默认配置了四个搜索选项（百度、Bing、Google、搜狗）供选择，并采用搜狗的搜索建议，选择后会保存在localStorage中，可以通过修改配置文件进行额外配置（还有一个User的功能，暂时没做界面，想改去配置文件进行修改）
 
 2. 收藏夹，需要点击旁边的配置图标进行定制，如下图所示：
 
@@ -47,7 +51,16 @@
 
 3. 天气、时间，会自动根据IP地址去获取所在城市，并查询当前城市最近4天的天气，可以点击城市名旁的定位图标刷新城市与天气，每天默认只会获取一次数据，由于接口有每日访问数量限制，请勿无聊点击刷新；右上角有个日期插件，展示还没找好节日信息的接口，所以没做额外功能，该功能暂时没有可配置项。
 
-4. 右下角俩图标：
+4. 待办事项配置：，可以通过标题旁➕添加新的待办事项：
+
+   ![todo_config](docs/todo_config.png)
+   
+   * 优先级会显示于任务列表左侧圆圈，红色表示高优先级，橙色表示普通优先级，绿色表示低优先级。
+   * 随着任务时间的逼近，待办任务的颜色会由黑色变成黄色，然后逐渐变成红色，用以提醒用户。
+   * 任务描述右侧两个图标分别为删除任务和完成任务图标。
+   * 任务列表按照任务时间由近至远排序。
+
+5. 右下角俩图标：
 
    ![extra](docs/extra.png)
 
@@ -55,16 +68,46 @@
 
 #### 附件
 
-1. 个人使用配置文件:
+1. 配置文件示例:
 
    ```json
    {
+       "todo": [
+           {
+               "id": 1527003650060,
+               "time": "2018-06-15 14:30",
+               "level": "high",
+               "desc": "项目系统分析会议",
+               "location": "15楼西会议室",
+               "status": "undo"
+           },
+           {
+               "id": 1527003726505,
+               "time": "2018-06-20 11:00",
+               "level": "low",
+               "desc": "新人培训计划",
+               "location": "5楼东侧工位",
+               "status": "undo"
+           },
+           {
+               "id": 1527003613708,
+               "time": "2018-06-30 14:30",
+               "level": "normal",
+               "desc": "XX产品需求分析",
+               "location": "12楼东会议室",
+               "status": "undo"
+           }
+       ],
        "search": {
            "searchEngine": {
                "items": [
                    [
                        "百度",
                        "https://www.baidu.com/baidu?wd="
+                   ],
+                   [
+                       "搜狗",
+                       "https://www.sogou.com/web?query="
                    ],
                    [
                        "Bing",
@@ -75,7 +118,7 @@
                        "https://www.google.com/search?q="
                    ]
                ],
-               "option": "https://www.baidu.com/baidu?wd="
+               "option": "https://www.sogou.com/web?query="
            },
            "user": {
                "name": "Cathor",
@@ -84,48 +127,15 @@
        },
        "tags": [
            {
-               "name": "编程",
-               "value": [
-                   [
-                       "Unix时间戳",
-                       "http://tool.chinaz.com/?adfwkey=dxc64"
-                   ],
-                   [
-                       "Unicode编码",
-                       "http://tool.chinaz.com/Tools/unicode.aspx"
-                   ],
-                   [
-                       "Ping检测",
-                       "http://ping.chinaz.com/"
-                   ],
-                   [
-                       "AntD",
-                       "http://ant.design/docs/react/introduce-cn"
-                   ],
-                   [
-                       "JSONProxy",
-                       "https://jsonp.afeld.me/"
-                   ],
-                   [
-                       "高德API",
-                       "http://lbs.amap.com/api/"
-                   ],
-                   [
-                       "StackOverflow",
-                       "https://stackoverflow.com/"
-                   ],
-                   [
-                       "Android框架",
-                       "https://www.cnblogs.com/angrycode/p/5956704.html"
-                   ]
-               ]
-           },
-           {
                "name": "搜索引擎",
                "value": [
                    [
                        "百度",
                        "http://www.baidu.com"
+                   ],
+                   [
+                       "搜狗",
+                       "https://www.sogou.com/web?query="
                    ],
                    [
                        "Google",
@@ -168,6 +178,10 @@
                    [
                        "京东",
                        "https://www.jd.com/"
+                   ],
+                   [
+                       "天猫",
+                       "https://www.tmall.com/"
                    ]
                ]
            },
@@ -193,19 +207,23 @@
                    [
                        "Twitter",
                        "https://twitter.com/home"
+                   ],
+                   [
+                       "QQ空间",
+                       "https://qzone.qq.com/"
                    ]
                ]
            },
            {
-               "name": "存储",
+               "name": "阅读",
                "value": [
                    [
-                       "百度云",
-                       "https://pan.baidu.com"
+                       "QQ阅读",
+                       "http://book.qq.com/"
                    ],
                    [
-                       "微云",
-                       "https://www.weiyun.com/disk"
+                       "起点中文",
+                       "https://www.qidian.com/"
                    ]
                ]
            }
