@@ -130,6 +130,7 @@ export default class TagPannel extends React.Component {
 
                                 console.log(item);
                                 tags.push(<Tag
+                                    className="tag-item"
                                     closable={this.state.editable}
                                     onClose={this.handleDeleteTag.apply(this, [content.name, item[0]])}
                                     style={{margin: "2px", borderSize: '2px', textAlign: "center"}}><a
@@ -137,6 +138,7 @@ export default class TagPannel extends React.Component {
                             });
 
                             tags.push(<Tag
+                                className="tag-item"
                                 style={{
                                     display: (!this.state.editable) ? "none" : "inline-block",
                                     background: '#fff',

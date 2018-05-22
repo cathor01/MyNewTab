@@ -151,12 +151,12 @@ class App extends Component {
                         <DatetimePannel config={this.state.datetime}/>
                     </Content>
 
-                    <Upload style={{position: "fixed", right: 50, bottom: 100}}  {...props}>
+                    <Upload className="background-icon"  {...props}>
                         <Button type="normal" shape="circle" icon="picture"
                                 size="large"/>
                     </Upload>
 
-                    <Button style={{position: "fixed", right: 50, bottom: 50}} type="primary" shape="circle" icon="edit"
+                    <Button className="config-icon" type="primary" shape="circle" icon="edit"
                             size="large" onClick={() => this.setState({configVisibility: true})}/>
                     <Modal
                         title="配置文件"

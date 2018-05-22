@@ -55,37 +55,37 @@ export default class WeatherList extends React.Component {
     }
 
     render() {
-        return (
-            <div style={{alignSelf: "center", width: "100%", marginTop: 30}}>
-                <List
-                    grid={{ gutter: 16, column: 4}}
-                    dataSource={this.props.weather}
-                    split="true"
-                    renderItem={item => {
-                        let otherStyle= {};
-                        if (item.date.substr(5) === new Date().Format("MM-dd")) {
-                            otherStyle.color = "orange";
-                        }
-                        return(
-                        <List.Item>
-                            <div className="weather-list-item" style={otherStyle}>
-                                <div style={{display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 4}}>
-                                    <WeatherIcons name={WeatherList.mapCnToCode(item.dayweather)} size="2x"/>
-                                    <div style={{ marginTop: "12px", textAlign: "center"}}>{item.dayweather}</div>
-                                </div>
+        let weatherItems = [];
 
-                                <div style={{display: "flex", flexDirection: "column", marginLeft: 8, alignItems: "center",  height: "100%"}}>
-                                    <div style={{display: "flex", flexDirection: "row", height: "3rem", fontSize: "1.4rem", justifyContent: "space-between"}}>
-                                        <div style={{alignSelf: "flex-start", padding: 0}}>{item.daytemp}</div>
-                                        <div style={{alignSelf: "center", fontSize: "2rem", padding: 0}}>/</div>
-                                        <div style={{alignSelf: "flex-end", padding: 0}}>{item.nighttemp}</div>
-                                    </div>
-                                    <div style={{textAlign: "center", marginTop: 2}}>{item.date.substr(5)}</div>
-                                </div>
-                            </div>
-                        </List.Item>
-                    )}}
-                />
+        for (var idx in this.props.weather) {
+            let item = this.props.weather[idx];
+
+            let otherStyle= {};
+            if (item.date.substr(5) === new Date().Format("MM-dd")) {
+                otherStyle.color = "orange";
+            }
+
+            weatherItems.push(<div className="weather-list-item" style={otherStyle}>
+                <div style={{display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 4}}>
+                    <WeatherIcons name={WeatherList.mapCnToCode(item.dayweather)} size="2x"/>
+                    <div style={{ marginTop: "12px", textAlign: "center"}}>{item.dayweather}</div>
+                </div>
+
+                <div style={{display: "flex", flexDirection: "column", marginLeft: 8, alignItems: "center",  height: "100%"}}>
+                    <div style={{display: "flex", flexDirection: "row", height: "3rem", fontSize: "1.4rem", justifyContent: "space-between"}}>
+                        <div style={{alignSelf: "flex-start", padding: 0}}>{item.daytemp}</div>
+                        <div style={{alignSelf: "center", fontSize: "2rem", padding: 0}}>/</div>
+                        <div style={{alignSelf: "flex-end", padding: 0}}>{item.nighttemp}</div>
+                    </div>
+                    <div style={{textAlign: "center", marginTop: 2}}>{item.date.substr(5)}</div>
+                </div>
+            </div>);
+        }
+
+
+        return (
+            <div className="weather-list">
+                {weatherItems}
             </div>
         );
     }

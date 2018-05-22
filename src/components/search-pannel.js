@@ -49,7 +49,7 @@ export default class SearchPannel extends Component {
         }
 
         const searchBefore = (
-            <Select style={{ width: 90, textAlign: "center" }} defaultValue={this.state.searchOption}
+            <Select style={{ width: "90px", textAlign: "center" }} defaultValue={this.state.searchOption}
                     onChange={this.handleSelectChange.bind(this)}>
                 {selectOptions}
             </Select>
@@ -60,7 +60,7 @@ export default class SearchPannel extends Component {
                 <Information user={this.props.user.name} homePage={this.props.user.homePage}/>
 
 
-                <Search addonBefore={searchBefore} style={{marginTop: "24px"}} placeholder="input search text" enterButton size="large"
+                <Search addonBefore={searchBefore} style={{marginTop: "24px"}} placeholder="搜索" enterButton size="large"
                     onSearch={this.handleSearch.bind(this)} />
             </div>
         </Card>);

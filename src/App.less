@@ -34,15 +34,55 @@
 
     background-color: transparent;
 
+    @media (max-width: 1600px) {
+      width: 95%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      background-color: transparent;
+    }
+
+    @media (max-width: 1000px) {
+      width: 80%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      background-color: transparent;
+    }
+
+    @media (max-width: 650px) {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      background-color: transparent;
+    }
+
     .pannel-card{
       width: 45%;
-      min-width: 500px;
+      min-width: 300px;
       margin: 24px;
       height: auto;
 
       @media(max-width: 1200px) {
+        width: 45%;
+        min-width: 300px;
+        margin: 16px;
+        height: auto;
+      }
+
+      @media(max-width: 1000px) {
         width: 80%;
-        min-width: 500px;
+        min-width: 300px;
         margin: 24px;
         height: auto;
       }
@@ -91,6 +131,17 @@
           .list-item {
             width: 100%;
             padding: 8px 16px;
+
+            .tag-item {
+              font-size: 1rem;
+              @media (max-width: 1366px) {
+                font-size: 0.8rem;
+              }
+
+              @media (max-width: 1000px) {
+                font-size: 0.8rem;
+              }
+            }
           }
         }
       }
@@ -104,20 +155,38 @@
         height: auto;
 
         .time-text{
-          font-size: 6rem;
+          font-size: 5rem;
           color: black;
           text-align: center;
+
+          @media (max-width: 650px) {
+            font-size: 4rem;
+            color: black;
+            text-align: center;
+          }
         }
 
-        .weather-list-item {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
 
+        .weather-list {
+          align-self: center;
           width: 100%;
+          margin-top: 16px;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
 
-          font-size: 1.0rem;
+
+          .weather-list-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            width: 23%;
+            min-width: 110px;
+
+            font-size: 1.0rem;
+          }
         }
       }
     }
@@ -128,19 +197,58 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      max-height: 95%;
+      max-height: 100%;
       padding-bottom: 24px;
       flex-wrap: wrap;
       padding-top: 24px;
 
-      @media (max-width: 1200px) {
+      @media (max-width: 1366px) {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        max-height: 100%;
+        padding-bottom: 12px;
+        flex-wrap: wrap;
+        padding-top: 12px;
+      }
+
+      @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: auto;
         flex-wrap: nowrap;
         padding-top: 24px;
+        padding-bottom: 24px;
       }
     }
+
+    .background-icon {
+      position: fixed;
+      right: 50px;
+      bottom: 150px;
+
+      @media (max-width: 650px) {
+        position: fixed;
+        right: 10px;
+        bottom: 100px;
+      }
+    }
+
+    .config-icon {
+      position: fixed;
+      right: 50px;
+      bottom: 100px;
+
+      @media (max-width: 650px) {
+        position: fixed;
+        right: 10px;
+        bottom: 50px;
+      }
+
+    }
+
   }
 }
