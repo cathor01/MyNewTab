@@ -34,6 +34,21 @@ export default class TodoPannel extends React.Component {
         timeOpen: false,
     };
 
+    /**
+     * 解析时间字符串
+     * @param str
+     * @returns {*}
+     */
+    static parseTime(str) {
+        let matchResult = str.match(/(\d+)-(\d+)-(\d+) (\d+):(\d+)/);
+        if (matchResult !== null && matchResult.length === 6) {
+            return new Date(parseInt(matchResult[1]), parseInt(matchResult[2]) - 1, parseInt(matchResult[3]),
+                parseInt(matchResult[4]), parseInt(matchResult[5]), 0)
+        }
+
+        return null;
+    }
+
     handleOpenChange = (open) => {
         this.setState({ timeOpen: open });
     };
@@ -95,9 +110,10 @@ export default class TodoPannel extends React.Component {
 
         for (var i in todos) {
             const item = todos[i];
-            if (new Date(item.time) - new Date() > 0 && item.status === "undo") {
+            const realTime = TodoPannel.parseTime(item.time);
+            if (realTime - new Date() > 0 && item.status === "undo") {
                 console.log(item);
-                timelineItems.push(<TaskLineItem location={item.location} time={item.time}
+                timelineItems.push(<TaskLineItem location={item.location} time={realTime}
                                                  level={item.level} desc={item.desc}
                                                  drop={this.handleDropTodo.apply(this, [item.id])}
                                                  finish={this.handleFinishTodo.apply(this, [item.id, item])}

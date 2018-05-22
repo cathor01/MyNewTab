@@ -7,7 +7,7 @@ export default class TaskLineItem extends React.Component {
 
     static defaultProps = {
         level: "low",
-        time: "2018-05-23 10:00",
+        time: new Date(),
         location: "教三 301",
         desc: "进行关于ReactJS的讲座",
         finish: () => {},
@@ -73,7 +73,7 @@ export default class TaskLineItem extends React.Component {
     }
 
     render() {
-        const timeLeft = new Date(this.props.time).getTime() - new Date().getTime();
+        const timeLeft = this.props.time.getTime() - new Date().getTime();
         const taskColor = TaskLineItem.getTaskColor(this.props.level);
         const titleColor = TaskLineItem.getTitleColor(timeLeft).split("_");
         const timeLeftText = TaskLineItem.formatTimeInterval(timeLeft);
@@ -91,9 +91,9 @@ export default class TaskLineItem extends React.Component {
             leftTime = (<Tag style={{marginLeft: 4}}>剩余{timeLeftText}</Tag>);
         }
 
-        return (<TaskItem color={taskColor}>
+        return (<TaskItem style={{paddingBottom: 8}} color={taskColor}>
                 <div style={{display: "flex", color: titleColor[0], flexWrap: "wrap"}}>
-                    {this.props.time}
+                    {this.props.time.Format("yyyy-MM-dd hh:mm")}
                     {location}
                     {leftTime}
                 </div>

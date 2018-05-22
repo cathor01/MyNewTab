@@ -68,16 +68,16 @@ export default class WeatherList extends React.Component {
             weatherItems.push(<div className="weather-list-item" style={otherStyle}>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 4}}>
                     <WeatherIcons name={WeatherList.mapCnToCode(item.dayweather)} size="2x"/>
-                    <div style={{ marginTop: "12px", textAlign: "center"}}>{item.dayweather}</div>
+                    <div style={{ marginTop: "6px", textAlign: "center"}}>{item.dayweather}</div>
                 </div>
 
-                <div style={{display: "flex", flexDirection: "column", marginLeft: 8, alignItems: "center",  height: "100%"}}>
-                    <div style={{display: "flex", flexDirection: "row", height: "3rem", fontSize: "1.4rem", justifyContent: "space-between"}}>
+                <div style={{display: "flex", flexDirection: "column", marginLeft: 4, alignItems: "center",  height: "100%"}}>
+                    <div style={{display: "flex", flexDirection: "row", height: "2.5rem", fontSize: "1.2rem", justifyContent: "space-between"}}>
                         <div style={{alignSelf: "flex-start", padding: 0}}>{item.daytemp}</div>
-                        <div style={{alignSelf: "center", fontSize: "2rem", padding: 0}}>/</div>
+                        <div style={{alignSelf: "center", fontSize: "1.8rem", padding: 0}}>/</div>
                         <div style={{alignSelf: "flex-end", padding: 0}}>{item.nighttemp}</div>
                     </div>
-                    <div style={{textAlign: "center", marginTop: 2}}>{item.date.substr(5)}</div>
+                    <div style={{textAlign: "center", marginTop: 0}}>{item.date.substr(5)}</div>
                 </div>
             </div>);
         }
