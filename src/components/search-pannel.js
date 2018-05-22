@@ -141,4 +141,13 @@ export default class SearchPannel extends Component {
             </div>
         </Card>);
     }
+
+    componentDidMount() {
+        $('.search-input').bind("keypress", (event) => {
+            console.log(event);
+            if (event.which !== 13) return;
+            console.log('你按了回车键...');
+            this.handleSearch();
+        });
+    }
 }
