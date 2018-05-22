@@ -1,7 +1,8 @@
 import React from 'react'
 import $ from 'jquery'
 
-import {Card, Icon, Input, List, Modal, Tag} from 'antd'
+import {Card, Icon, Input, List, Modal, Tag, Form} from 'antd'
+const FormItem = Form.Item;
 
 export default class TagPannel extends React.Component {
     static defaultProps = {
@@ -96,6 +97,17 @@ export default class TagPannel extends React.Component {
     }
 
     render() {
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 4 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 20 },
+            },
+        };
+
         return (
             <Card hoverable="true" className="pannel-card">
                 <div className="tag-pannel">
@@ -119,7 +131,10 @@ export default class TagPannel extends React.Component {
                                     onOk={this.handleNewRowModal.bind(this)}
                                     onCancel={this.cancelVisibility.apply(this, ["newRowVisibility"])}
                                 >
-                                    <Input placeholder="新分组名" onChange={this.handleChange.apply(this, ["newRowName"])}/>
+                                    <FormItem {...formItemLayout}
+                                              label="分组名称">
+                                        <Input placeholder="新分组" onChange={this.handleChange.apply(this, ["newRowName"])}/>
+                                    </FormItem>
                                 </Modal>
                             </div>}
                         renderItem={(content) => {
@@ -151,14 +166,20 @@ export default class TagPannel extends React.Component {
                                     <Icon type="plus"/>新标签
                                 </div>
                                 <Modal
-                                    title="添加标签"
+                                    title="新标签"
                                     visible={this.state.newTagVisibility}
                                     onOk={this.handleNewTagModal.bind(this)}
                                     onCancel={this.cancelVisibility.apply(this, ["newTagVisibility"])}
                                 >
-                                    <Input placeholder="标签名" onChange={this.handleChange.apply(this, ["newTagName"])}/>
-                                    <Input placeholder="标签链接" onChange={this.handleChange.apply(this, ["newTagLink"])}
+                                    <FormItem {...formItemLayout}
+                                              label="标签名程">
+                                        <Input placeholder="标签名" onChange={this.handleChange.apply(this, ["newTagName"])}/>
+                                    </FormItem>
+                                    <FormItem {...formItemLayout}
+                                              label="标签链接">
+                                        <Input placeholder="标签链接" onChange={this.handleChange.apply(this, ["newTagLink"])}
                                            style={{marginTop: 16}}/>
+                                    </FormItem>
                                 </Modal>
                             </Tag>);
 

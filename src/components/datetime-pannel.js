@@ -38,7 +38,7 @@ export default class DatetimePannel extends React.Component {
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%"}}>
                         <div style={{fontSize: "1.1em"}}>
                             {this.state.location.city}
-                            <Button style={{marginLeft: 4}} type="dashed" size="small" shape="circle" icon="compass" loading={this.state.loading} onClick={this.reloadLocation.bind(this)}/>
+                            <Button style={{marginLeft: 4}} type="dashed" size="small" shape="circle" icon="environment-o" loading={this.state.loading} onClick={this.reloadLocation.bind(this)}/>
                         </div>
                         <Popover content={calendar}>
                             <Button style={{alignSelf: "flex-end"}} type="dashed">{new Date().toLocaleDateString()}</Button>

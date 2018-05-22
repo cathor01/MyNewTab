@@ -9,6 +9,7 @@ import {Affix, Button, Layout, Modal, Input, Upload, Icon} from 'antd';
 import SearchPannel from "./components/search-pannel";
 import DatetimePannel from "./components/datetime-pannel";
 import TagPannel from "./components/tag-pannel";
+import TodoPannel from "./components/todo-pannel";
 
 const {Content, Footer} = Layout;
 const {TextArea} = Input;
@@ -60,6 +61,9 @@ class App extends Component {
         },
         tags: [
         ],
+        todo: [
+
+        ],
         handle: {
             search: {
                 changeSearch: (option) => {
@@ -107,6 +111,27 @@ class App extends Component {
                         }
                     }
                 },
+            },
+            todo: {
+                addTodo: (item) => {
+                    if (! 'id' in item) {
+                        item.id = new Date().getTime();
+                    }
+
+                    this.config.todo.push(item);
+                    this.saveConfig();
+                },
+                updateTodo: (id, item) => {
+                    let idx = this.config.todo.findIndex(a => a.id === id);
+                    this.config.todo[idx] = item;
+                    this.saveConfig();
+
+                },
+                removeTodo: (id) => {
+                    let idx = this.config.todo.findIndex(a => a.id === id);
+                    this.config.todo.splice(idx, 1);
+                    this.saveConfig();
+                }
             }
         },
         configVisibility: false,
@@ -165,6 +190,8 @@ class App extends Component {
                         <TagPannel items={this.state.tags} handle={this.state.handle.tags}/>
 
                         <DatetimePannel config={this.state.datetime}/>
+
+                        <TodoPannel todo={this.state.todo} handle={this.state.handle.todo}/>
                     </Content>
 
                     <Upload className="background-icon"  {...props}>
@@ -218,9 +245,17 @@ class App extends Component {
                 },
                 tags: [
                 ],
+                todo: [
+
+                ],
             };
             localStorage.setItem("config", JSON.stringify(this.config));
         }
+
+        if (!("todo" in this.config)) {
+            this.config.todo = [];
+        }
+
         this.setState({tempConfig: JSON.stringify(this.config)});
         this.setState(this.config);
     }
