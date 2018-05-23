@@ -58,12 +58,23 @@ export default class TagPannel extends React.Component {
         newTagRow: ""
     };
 
+    /**
+     * 调用props传递的参数分类的方法
+     * @param row
+     * @returns {Function}
+     */
     handleDeleteRow(row) {
         return () => {
             this.props.handle.deleteRow(row)
         }
     }
 
+    /**
+     * 调用props传递的删除Tag的方法
+     * @param row
+     * @param name
+     * @returns {Function}
+     */
     handleDeleteTag(row, name) {
         return (ev) => {
             ev.preventDefault();
@@ -71,24 +82,39 @@ export default class TagPannel extends React.Component {
         }
     }
 
+    /**
+     * 调用props传递的添加分类的方法
+     */
     handleNewRowModal() {
         this.props.handle.newRow(this.state.newRowName);
         this.setState({newRowVisibility: false});
     }
 
+    /**
+     * 调用props传递的添加Tag方法
+     */
     handleNewTagModal() {
         this.props.handle.newTag(this.state.newTagRow, [this.state.newTagName, this.state.newTagLink]);
         this.setState({newTagVisibility: false});
     }
 
-
+    /**
+     * 绑定Input修改某个state字段
+     * @param key
+     * @returns {Function}
+     */
     handleChange(key) {
         return (event) => {
-            this.setState({[key]: event.target.value})
+            this.setState({[key]: event.target.value});
             console.log(this.state)
         }
     }
 
+    /**
+     * 取消某个Modal的可视状态
+     * @param key
+     * @returns {Function}
+     */
     cancelVisibility(key) {
         return () => {
             this.setState({[key]: false});
@@ -97,6 +123,7 @@ export default class TagPannel extends React.Component {
     }
 
     render() {
+        // Modal的FormItem的样式
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -107,6 +134,28 @@ export default class TagPannel extends React.Component {
                 sm: { span: 20 },
             },
         };
+
+        let footer = null;
+
+        // footer配置，在editable下可见
+        if (this.state.editable) {
+            footer = (<div>
+                <a style={{fontSize: "1.1em"}}
+                   onClick={() => this.setState({newRowVisibility: true})}>添加新分组</a>
+                <Modal
+                    title="添加新分组"
+                    visible={this.state.newRowVisibility}
+                    onOk={this.handleNewRowModal.bind(this)}
+                    onCancel={this.cancelVisibility.apply(this, ["newRowVisibility"])}
+                >
+                    <FormItem {...formItemLayout}
+                              label="分组名称">
+                        <Input placeholder="新分组"
+                               onChange={this.handleChange.apply(this, ["newRowName"])}/>
+                    </FormItem>
+                </Modal>
+            </div>);
+        }
 
         return (
             <Card hoverable="true" className="pannel-card">
@@ -122,21 +171,7 @@ export default class TagPannel extends React.Component {
                         bordered="true"
                         split="true"
                         dataSource={this.props.items}
-                        footer={
-                            <div style={{display: (!this.state.editable) ? "none" : "inline-block"}}>
-                                <a style={{fontSize: "1.1em"}} onClick={() => this.setState({newRowVisibility: true})}>添加新分组</a>
-                                <Modal
-                                    title="添加新分组"
-                                    visible={this.state.newRowVisibility}
-                                    onOk={this.handleNewRowModal.bind(this)}
-                                    onCancel={this.cancelVisibility.apply(this, ["newRowVisibility"])}
-                                >
-                                    <FormItem {...formItemLayout}
-                                              label="分组名称">
-                                        <Input placeholder="新分组" onChange={this.handleChange.apply(this, ["newRowName"])}/>
-                                    </FormItem>
-                                </Modal>
-                            </div>}
+                        footer= {footer}
                         renderItem={(content) => {
                             var tags = [];
 

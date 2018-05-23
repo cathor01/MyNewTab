@@ -92,15 +92,15 @@ export default class TaskLineItem extends React.Component {
         }
 
         return (<TaskItem style={{paddingBottom: 8}} color={taskColor}>
-                <div style={{display: "flex", color: titleColor[0], flexWrap: "wrap"}}>
-                    {this.props.time.Format("yyyy-MM-dd hh:mm")}
+                <div style={{display: "flex", color: titleColor[0], alignItems: "baseline"}}>
+                    <b>{this.props.desc}</b>
                     {location}
-                    {leftTime}
-                </div>
-                <div style={{display: "flex", flexDirection: "row", alignItems: "baseline", }}>
-                    {this.props.desc}
                     <Icon type="delete" size="large" style={{marginLeft: 4, color: "#f50"}} onClick={this.props.drop}/>
                     <Icon type="check-circle-o" size="large" style={{marginLeft: 4, color: "#52c41a"}} onClick={this.props.finish} />
+                </div>
+                <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: "flex-end", marginTop: 2}}>
+                    {this.props.time.Format("yyyy-MM-dd hh:mm")}
+                    {leftTime}
                 </div>
         </TaskItem>);
     }

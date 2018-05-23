@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.less';
 
 import $ from 'jquery';
-import {Affix, Button, Layout, Modal, Input, Upload, Icon} from 'antd';
+import { Button, Layout, Modal, Input, Upload, Transfer} from 'antd';
 
 
 import SearchPannel from "./components/search-pannel";
@@ -32,6 +32,11 @@ Date.prototype.Format = function (fmt) { //author: meizz
 
 class App extends Component {
 
+    /**
+     * 加载base64的图片
+     * @param img Image对象或img dom
+     * @returns {string} base64数据
+     */
     static getBase64Image(img) {
         var canvas = document.createElement("canvas");
         canvas.width = img.width;
@@ -64,6 +69,7 @@ class App extends Component {
         todo: [
 
         ],
+        cardList: ["time", "todo", "search", "tag"],
         handle: {
             search: {
                 changeSearch: (option) => {
@@ -135,20 +141,52 @@ class App extends Component {
             }
         },
         configVisibility: false,
+        rankVisibility: false,
         tempConfig: null
     };
 
-    loadBackground() {
-        return `url("${this.state.image.url}") no-repeat`;
-    }
-
+    /**
+     * 存储配置文件，并加载配置
+     */
     saveConfig() {
         localStorage.setItem("config", JSON.stringify(this.config));
         this.setState(this.config);
     }
 
+    /**
+     * 处理配置输入框修改事件
+     * @param ev
+     */
     handleConfigChange(ev) {
         this.setState({tempConfig: ev.target.value})
+    }
+
+    /**
+     * 处理模块排序修改事件
+     * @param target
+     */
+    handleCardChange(target) {
+        this.config.cardList = target;
+        this.setState({cardList: target})
+    }
+
+    /**
+     * 根据名称加载节点
+     * @param name
+     * @returns {*}
+     */
+    loadDomByName(name) {
+        if (name === "search") {
+            return (<SearchPannel searchEngine={this.state.search.searchEngine} user={this.state.search.user}
+                                  tags={this.state.search.tags} handleFunc={this.state.handle.search}/>)
+        } else if (name === "todo") {
+            return (<TodoPannel todo={this.state.todo} handle={this.state.handle.todo}/>)
+        } else if (name === "time") {
+            return (<DatetimePannel config={this.state.datetime}/>)
+        } else if (name === "tag") {
+            return (<TagPannel items={this.state.tags} handle={this.state.handle.tags}/>)
+        }
+        return null;
     }
 
     render() {
@@ -169,7 +207,6 @@ class App extends Component {
                         App.saveLocalImage(reader.result);
                         $("#background").css("background-image", "url(\"" + reader.result + "\")");
                     };
-
                     reader.readAsDataURL(file);
                 }
 
@@ -177,23 +214,48 @@ class App extends Component {
             },
             fileList: this.state.fileList,
         };
+
+        // 卡片包装，之后可能做多column
+        const leftList = [];
+        const rightList = [];
+        for (var i in this.state.cardList) {
+            const item = this.state.cardList[i];
+
+            const dom = this.loadDomByName(item);
+
+            if (i < 2) {
+                leftList.push(dom);
+            } else {
+                rightList.push(dom);
+            }
+        }
+
+        // 配置文件
+        let sourceData = [{
+            name: "时钟天气",
+            key: "time"
+        }, {
+            name: "收藏夹",
+            key: "tag"
+        }, {
+            name: "搜索",
+            key: "search"
+        }, {
+            name: "待办任务",
+            key: "todo"
+        }];
+
         return (
             <div id="root-div" style={{width: "100%", height: "100%"}}>
 
-                <div id="background" />
+                <div id="background"/>
                 <Layout className="layout">
                     <Content className="layout-content">
                         <div className="card-wrapper">
-                            <SearchPannel searchEngine={this.state.search.searchEngine} user={this.state.search.user}
-                                          tags={this.state.search.tags} handleFunc={this.state.handle.search}
-                            />
-
-                            <TagPannel items={this.state.tags} handle={this.state.handle.tags}/>
+                            {leftList}
                         </div>
                         <div className="card-wrapper">
-                            <DatetimePannel config={this.state.datetime}/>
-
-                            <TodoPannel todo={this.state.todo} handle={this.state.handle.todo}/>
+                            {rightList}
                         </div>
                     </Content>
 
@@ -214,28 +276,114 @@ class App extends Component {
                         }}
                         onCancel={() => this.setState({configVisibility: false})}
                     >
-                        <TextArea placeholder="配置文件" rows={15} onChange={this.handleConfigChange.bind(this)} defaultValue={JSON.stringify(this.config)}/>
+                        <TextArea className="config-textarea" placeholder="配置文件" rows={15} onChange={this.handleConfigChange.bind(this)}
+                                  defaultValue={JSON.stringify(this.config)} value={this.state.tempConfig}/>
+                        <Button type="danger"
+                                style={{marginTop: 4}}
+                                onClick={() => {
+                                    this.reloadConfig();
+                                    this.setState(this.config);
+                                    this.setState({tempConfig: JSON.stringify(this.config)});
+                                }} >重载配置</Button>
+                    </Modal>
+
+                    <Button className="card-icon" shape="circle" icon="bars"
+                            size="large" onClick={() => this.setState({rankVisibility: true})}/>
+                    <Modal
+                        title="卡片排序"
+                        visible={this.state.rankVisibility}
+                        onOk={() => {
+                            this.saveConfig();
+                            this.setState({rankVisibility: false});
+                        }}
+                        onCancel={() => this.setState({rankVisibility: false})}
+                    >
+                        <Transfer
+                            dataSource={sourceData}
+                            titles={['可选模块', '激活模块']}
+                            targetKeys={this.state.cardList}
+                            onChange={this.handleCardChange.bind(this)}
+                            render={item => item.name}
+                            rowKey={item => item.key}
+                        />
                     </Modal>
                 </Layout>
 
             </div>
         );
+
     }
 
     static saveLocalImage(source) {
         localStorage.setItem("background", source);
     }
 
+    /**
+     * 初始化配置文件
+     */
+    reloadConfig() {
+        this.config = {
+            "todo": [{
+                "id": 1527003650060,
+                "time": "2018-06-15 14:30",
+                "level": "high",
+                "desc": "项目系统分析会议",
+                "location": "15楼西会议室",
+                "status": "undo"
+            }, {
+                "id": 1527003726505,
+                "time": "2018-06-20 11:00",
+                "level": "low",
+                "desc": "新人培训计划",
+                "location": "5楼东侧工位",
+                "status": "undo"
+            }, {
+                "id": 1527003613708,
+                "time": "2018-06-30 14:30",
+                "level": "normal",
+                "desc": "XX产品需求分析",
+                "location": "12楼东会议室",
+                "status": "undo"
+            }],"search":{
+                "searchEngine": {
+                    "items": [["百度", "https://www.baidu.com/baidu?wd="], ["搜狗", "https://www.sogou.com/web?query="], ["Bing", "https://cn.bing.com/search?q="], ["Google", "https://www.google.com/search?q="]],
+                    "option": "https://www.sogou.com/web?query="
+                }, "user": {"name": "Cathor", "homePage": "https://github.com/cathor01"}},
+            "tags": [{
+                "name": "搜索引擎",
+                "value": [["百度", "http://www.baidu.com"], ["搜狗", "https://www.sogou.com/web?query="], ["Google", "https://www.google.com"]]
+            }, {
+                "name": "视频",
+                "value": [["B站", "https://bilibili.com"], ["A站", "http://www.acfun.cn/"], ["优酷", "http://youku.com/"], ["油管", "https://www.youtube.com/"], ["爱奇艺", "http://www.iqiyi.com/"]]
+            }, {
+                "name": "购物",
+                "value": [["淘宝", "https://www.taobao.com/"], ["京东", "https://www.jd.com/"], ["天猫", "https://www.tmall.com/"]]
+            }, {
+                "name": "生活",
+                "value": [["微博", "https://weibo.com"], ["知乎", "https://www.zhihu.com/"], ["贴吧", "https://tieba.baidu.com"], ["脸书", "https://www.facebook.com/"], ["Twitter", "https://twitter.com/home"], ["QQ空间", "https://qzone.qq.com/"]]
+            }, {"name": "阅读", "value": [["QQ阅读", "http://book.qq.com/"], ["起点中文", "https://www.qidian.com/"]]}],
+            "cardList": [
+                "time", "todo", "search", "tag"
+            ]};
+        localStorage.setItem("config", JSON.stringify(this.config));
+    }
+
     componentWillMount() {
+        // 加载配置文件
         if (localStorage.getItem("config") !== null) {
             this.config = JSON.parse(localStorage.getItem("config"));
         } else {
-            this.config = {"todo":[{"id":1527003650060,"time":"2018-06-15 14:30","level":"high","desc":"项目系统分析会议","location":"15楼西会议室","status":"undo"},{"id":1527003726505,"time":"2018-06-20 11:00","level":"low","desc":"新人培训计划","location":"5楼东侧工位","status":"undo"},{"id":1527003613708,"time":"2018-06-30 14:30","level":"normal","desc":"XX产品需求分析","location":"12楼东会议室","status":"undo"}],"search":{"searchEngine":{"items":[["百度","https://www.baidu.com/baidu?wd="],["搜狗","https://www.sogou.com/web?query="],["Bing","https://cn.bing.com/search?q="],["Google","https://www.google.com/search?q="]],"option":"https://www.sogou.com/web?query="},"user":{"name":"Cathor","homePage":"https://github.com/cathor01"}},"tags":[{"name":"搜索引擎","value":[["百度","http://www.baidu.com"],["搜狗","https://www.sogou.com/web?query="],["Google","https://www.google.com"]]},{"name":"视频","value":[["B站","https://bilibili.com"],["A站","http://www.acfun.cn/"],["优酷","http://youku.com/"],["油管","https://www.youtube.com/"],["爱奇艺","http://www.iqiyi.com/"]]},{"name":"购物","value":[["淘宝","https://www.taobao.com/"],["京东","https://www.jd.com/"],["天猫","https://www.tmall.com/"]]},{"name":"生活","value":[["微博","https://weibo.com"],["知乎","https://www.zhihu.com/"],["贴吧","https://tieba.baidu.com"],["脸书","https://www.facebook.com/"],["Twitter","https://twitter.com/home"],["QQ空间","https://qzone.qq.com/"]]},{"name":"阅读","value":[["QQ阅读","http://book.qq.com/"],["起点中文","https://www.qidian.com/"]]}]};
-            localStorage.setItem("config", JSON.stringify(this.config));
+            this.reloadConfig();
         }
 
+        // @since v0.2
         if (!("todo" in this.config)) {
             this.config.todo = [];
+        }
+
+        // @since v0.3
+        if (!("cardList" in this.config)) {
+            this.config.cardList = ["time", "todo", "search", "tag"];
         }
 
         this.setState({tempConfig: JSON.stringify(this.config)});
@@ -243,6 +391,7 @@ class App extends Component {
     }
 
     componentDidMount() {
+        // 加载localStorage中存储的图片数据
         if (localStorage.getItem("background") !== null) {
             $("#background").css("background-image", "url(\"" + localStorage.getItem("background") + "\")");
         }
