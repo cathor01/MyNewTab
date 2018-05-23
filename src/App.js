@@ -183,15 +183,18 @@ class App extends Component {
                 <div id="background" />
                 <Layout className="layout">
                     <Content className="layout-content">
-                        <SearchPannel searchEngine={this.state.search.searchEngine} user={this.state.search.user}
-                                      tags={this.state.search.tags} handleFunc={this.state.handle.search}
-                        />
+                        <div className="card-wrapper">
+                            <SearchPannel searchEngine={this.state.search.searchEngine} user={this.state.search.user}
+                                          tags={this.state.search.tags} handleFunc={this.state.handle.search}
+                            />
 
-                        <TagPannel items={this.state.tags} handle={this.state.handle.tags}/>
+                            <TagPannel items={this.state.tags} handle={this.state.handle.tags}/>
+                        </div>
+                        <div className="card-wrapper">
+                            <DatetimePannel config={this.state.datetime}/>
 
-                        <DatetimePannel config={this.state.datetime}/>
-
-                        <TodoPannel todo={this.state.todo} handle={this.state.handle.todo}/>
+                            <TodoPannel todo={this.state.todo} handle={this.state.handle.todo}/>
+                        </div>
                     </Content>
 
                     <Upload className="background-icon"  {...props}>

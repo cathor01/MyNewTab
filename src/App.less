@@ -26,65 +26,60 @@
 
     justify-items: center;
 
-    justify-content: space-between;
+    justify-content: space-around;
 
     margin: 0 auto;
 
     background-color: transparent;
 
-    @media (max-width: 1600px) {
+    @media (max-width: 1440px) {
+      width: 90%;
+    }
+
+    @media (max-width: 1280px) {
       width: 95%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-items: center;
-      justify-content: space-between;
-      margin: 0 auto;
-      background-color: transparent;
     }
 
     @media (max-width: 1000px) {
       width: 80%;
       height: auto;
-      display: flex;
-      flex-direction: column;
-      justify-items: center;
-      justify-content: space-between;
-      margin: 0 auto;
-      background-color: transparent;
     }
 
     @media (max-width: 650px) {
       width: 100%;
       height: auto;
+    }
+
+    .card-wrapper {
       display: flex;
       flex-direction: column;
-      justify-items: center;
-      justify-content: space-between;
-      margin: 0 auto;
-      background-color: transparent;
+      height: auto;
+      width: 45%;
+
+
+      @media (max-width: 1000px) {
+        width: 80%;
+      }
     }
 
     .pannel-card{
-      width: 45%;
+      width: 100%;
       min-width: 300px;
-      margin: 24px;
+      margin: 24px auto;
       height: auto;
       background: rgba(255, 255, 255, 0.86);
       backdrop-filter: blur(8px);
 
       @media(max-width: 1200px) {
-        width: 45%;
-        min-width: 300px;
-        margin: 12px;
-        height: auto;
+        margin: 12px auto;
       }
 
       @media(max-width: 1000px) {
-        width: 80%;
-        min-width: 300px;
-        margin: 24px;
-        height: auto;
+        margin: 24px auto;
+      }
+
+      @media(max-width: 650px) {
+        margin: 12px auto;
       }
 
       .search-pannel {
@@ -258,6 +253,7 @@
       justify-content: flex-start;
       align-items: center;
       max-height: 100%;
+      height: auto;
       padding-top: 24px;
       padding-bottom: 24px;
       flex-wrap: wrap;
@@ -269,6 +265,7 @@
         justify-content: flex-start;
         align-items: center;
         max-height: 100%;
+        height: auto;
         padding-bottom: 12px;
         flex-wrap: wrap;
         padding-top: 12px;
