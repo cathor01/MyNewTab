@@ -154,5 +154,8 @@
                 ]
             ]
         }
+    ],
+    "cardList": [
+        "time", "todo", "search", "tag"
     ]
 }
