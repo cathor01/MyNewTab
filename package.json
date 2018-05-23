@@ -13,7 +13,7 @@
     "react-scripts": "1.1.4",
     "react-weathericons": "^1.0.4"
   },
-  "homepage": ".",
+  "homepage": "https://pages.cathor.cn",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

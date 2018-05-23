@@ -181,10 +181,7 @@ export default class TodoPannel extends React.Component {
                 </div>
 
                 <Timeline
-                    style={{
-                        marginLeft: 32,
-                        marginTop: 8
-                    }}
+                    className="time-line"
                     >
                     {timelineItems}
                 </Timeline>
