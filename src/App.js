@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.less';
 
 import $ from 'jquery';
-import { Button, Layout, Modal, Input, Upload, Transfer} from 'antd';
+import {Button, Layout, Modal, Input, Upload, Transfer, Tooltip} from 'antd';
 
 
 import SearchPannel from "./components/search-pannel";
@@ -260,8 +260,10 @@ class App extends Component {
                     </Content>
 
                     <Upload className="background-icon"  {...props}>
-                        <Button type="normal" shape="circle" icon="picture"
+                        <Tooltip title="图片推荐小于3MB">
+                            <Button type="normal" shape="circle" icon="picture"
                                 size="large"/>
+                        </Tooltip>
                     </Upload>
 
                     <Button className="config-icon" type="primary" shape="circle" icon="edit"
@@ -394,6 +396,9 @@ class App extends Component {
         // 加载localStorage中存储的图片数据
         if (localStorage.getItem("background") !== null) {
             $("#background").css("background-image", "url(\"" + localStorage.getItem("background") + "\")");
+        } else {
+            // 动态引入background-image样式，避免每次都需要加载图片
+            import("./background-image.less");
         }
     }
 }
