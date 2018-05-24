@@ -394,6 +394,9 @@ class App extends Component {
         // 加载localStorage中存储的图片数据
         if (localStorage.getItem("background") !== null) {
             $("#background").css("background-image", "url(\"" + localStorage.getItem("background") + "\")");
+        } else {
+            // 动态引入background-image样式，避免每次都需要加载图片
+            import("./background-image.less");
         }
     }
 }
