@@ -10,6 +10,7 @@ import SearchPannel from "./components/search-pannel";
 import DatetimePannel from "./components/datetime-pannel";
 import TagPannel from "./components/tag-pannel";
 import TodoPannel from "./components/todo-pannel";
+import FoodPannel from "./components/food-pannel";
 
 const {Content, Footer} = Layout;
 const {TextArea} = Input;
@@ -184,7 +185,7 @@ class App extends Component {
         } else if (name === "time") {
             return (<DatetimePannel config={this.state.datetime}/>)
         } else if (name === "tag") {
-            return (<TagPannel items={this.state.tags} handle={this.state.handle.tags}/>)
+            return (<FoodPannel />)// (<TagPannel items={this.state.tags} handle={this.state.handle.tags}/>)
         }
         return null;
     }
