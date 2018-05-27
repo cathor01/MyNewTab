@@ -3,7 +3,7 @@
   height: 100%;
   background-color: transparent;
 
-  #background {
+  .background {
     width: 100%;
     height: 100%;
 
@@ -67,8 +67,9 @@
       min-width: 300px;
       margin: 24px auto;
       height: auto;
-      background: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
 
       @media(max-width: 1200px) {
         margin: 12px auto;
@@ -80,6 +81,28 @@
 
       @media(max-width: 650px) {
         margin: 12px auto;
+      }
+
+
+      .content-blurred {
+        padding:0;
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        -webkit-filter:blur(10px);
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        opacity:.35;
+        z-index: 1;
+        background-clip: padding-box;
+        -webkit-mask-size: auto;
+        -webkit-mask-clip: padding;
+
+        .image-item {
+          z-index: -2;
+        }
       }
 
       .search-pannel {

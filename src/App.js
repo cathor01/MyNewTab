@@ -248,7 +248,7 @@ class App extends Component {
         return (
             <div id="root-div" style={{width: "100%", height: "100%"}}>
 
-                <div id="background"/>
+                <div className="background"/>
                 <Layout className="layout">
                     <Content className="layout-content">
                         <div className="card-wrapper">
@@ -393,8 +393,50 @@ class App extends Component {
     componentDidMount() {
         // 加载localStorage中存储的图片数据
         if (localStorage.getItem("background") !== null) {
-            $("#background").css("background-image", "url(\"" + localStorage.getItem("background") + "\")");
+            $(".background").css("background-image", "url(\"" + localStorage.getItem("background") + "\")");
         }
+
+        var imageUrl = $(".background").css("background-image");
+
+        if (imageUrl !== "") {
+            var background = $(".background");
+
+            $('.pannel-card').each((id, val) => {
+                var component = $(val);
+                let width = component.width();
+                let height = component.height();
+
+                var contentBlurred = $('<div/>');
+                contentBlurred.addClass('content-blurred');
+                var cloneNode = background.clone();
+                contentBlurred.append(cloneNode);
+                component.append(contentBlurred);
+                cloneNode.addClass("image-item");
+
+                // var sid = this.createSvg(id, width, height);
+
+                //cloneNode.css("-webkit-mask-image", `element(.pannel-card)`);
+            });
+
+        }
+
+    }
+
+    createSvg(idx, width, height) {
+        var svgItem = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svgItem.setAttribute("width", width);
+        svgItem.setAttribute("height", height);
+        var rectObj = document.createElementNS("http://www.w3.org/2000/svg","rect");
+        if(rectObj){
+            rectObj.setAttribute("width", width);
+            rectObj.setAttribute("height", height);
+            rectObj.setAttribute("style","fill:rgb(0,0,0)");
+            svgItem.id = "my-svg-" + idx;
+            document.getElementById('root').appendChild(svgItem);
+            svgItem.appendChild(rectObj);
+            return "my-svg-" + idx;
+        }
+        return null;
     }
 }
 
