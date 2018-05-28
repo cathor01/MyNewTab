@@ -108,7 +108,7 @@ export default class TodoPannel extends React.Component {
 
         todos = todos.sort((a, b) => (a.time > b.time)? 1: (a.time === b.time)? 0 : -1);
 
-        for (var i in todos) {
+        for (let i = 0; i < todos.length; i++) {
             const item = todos[i];
             const realTime = TodoPannel.parseTime(item.time);
             if (realTime - new Date() > 0 && item.status === "undo") {
