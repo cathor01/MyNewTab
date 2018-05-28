@@ -185,7 +185,9 @@ class App extends Component {
         } else if (name === "time") {
             return (<DatetimePannel config={this.state.datetime}/>)
         } else if (name === "tag") {
-            return (<FoodPannel />)// (<TagPannel items={this.state.tags} handle={this.state.handle.tags}/>)
+            return (<TagPannel items={this.state.tags} handle={this.state.handle.tags}/>)
+        } else if (name === "food") {
+            return (<FoodPannel/>)
         }
         return null;
     }
@@ -217,18 +219,27 @@ class App extends Component {
         };
 
         // 卡片包装，之后可能做多column
-        const leftList = [];
-        const rightList = [];
+        let wrapperList = [];
+        var tempList = [];
         for (var i in this.state.cardList) {
             const item = this.state.cardList[i];
 
             const dom = this.loadDomByName(item);
 
-            if (i < 2) {
-                leftList.push(dom);
-            } else {
-                rightList.push(dom);
+            tempList.push(dom);
+
+            if (tempList.length === 2) {
+                wrapperList.push(<div className="card-wrapper">
+                    {tempList}
+                </div>);
+                tempList = [];
             }
+        }
+
+        if (tempList.length > 0) {
+            wrapperList.push(<div className="card-wrapper">
+                {tempList}
+            </div>);
         }
 
         // 配置文件
@@ -244,6 +255,9 @@ class App extends Component {
         }, {
             name: "待办任务",
             key: "todo"
+        }, {
+            name: "吃什么",
+            key: "food"
         }];
 
         return (
@@ -252,12 +266,7 @@ class App extends Component {
                 <div id="background"/>
                 <Layout className="layout">
                     <Content className="layout-content">
-                        <div className="card-wrapper">
-                            {leftList}
-                        </div>
-                        <div className="card-wrapper">
-                            {rightList}
-                        </div>
+                        {wrapperList}
                     </Content>
 
                     <Upload className="background-icon"  {...props}>

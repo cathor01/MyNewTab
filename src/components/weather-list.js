@@ -57,7 +57,7 @@ export default class WeatherList extends React.Component {
     render() {
         let weatherItems = [];
 
-        for (var idx in this.props.weather) {
+        for (let idx = 0; idx < this.props.weather.length; idx++) {
             let item = this.props.weather[idx];
 
             let otherStyle= {};
