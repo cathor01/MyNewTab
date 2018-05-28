@@ -1,7 +1,7 @@
 import React from 'react';
 
 import $ from 'jquery';
-import {Button, Card, Tag} from "antd";
+import {Button, Card, Tag, Modal} from "antd";
 
 Array.prototype.contains = function(item){
     for(let i=0;i<this.length;i++){
@@ -45,7 +45,7 @@ export default class FoodPannel extends React.Component {
         let typeStr = this.state.food[this.state.index].type;
 
         if (typeStr !== undefined) {
-            let types = this.state.food[this.state.index].type.split(";");
+            let types = this.state.food[this.state.index].type.split(/[\\|;]/);
 
             var visitedTags = [];
 
@@ -59,17 +59,22 @@ export default class FoodPannel extends React.Component {
             }
         }
 
+        let appends = [];
+        if (!this.state.runningRandom) {
+            appends.push(<div className="food-address">{this.state.food[this.state.index].address}</div>);
+            appends.push(<div style={{marginTop: 8}}>{tags}</div>);
+        }
+
         return (<Card hoverable="true" className="pannel-card">
             <div className="food-pannel">
-                <div style={{alignSelf: "flex-start", marginBottom: "16px", display: "flex", flexDirection: "row", alignItems: "baseline"}}>
+                <div style={{alignSelf: "flex-start", marginBottom: "16px", display: "flex", flexDirection: "row", alignItems: "center"}}>
                     <h2 style={{margin: 0, marginRight: 8}}>吃什么?</h2>
-                    <Button style={{marginLeft: 4}} type="dashed" size="small" shape="circle" icon="environment-o" loading={this.state.loading} onClick={this.refreshLocationFood.bind(this)}/>
+                    <Button style={{marginLeft: 4}} type="dashed" size="small" shape="circle" icon="sync" loading={this.state.loading} onClick={this.refreshLocationFood.bind(this)}/>
                 </div>
                 <div className="food-title"><a
                     style={{color: "black"}}
                     href={`https://ditu.amap.com/place/${this.state.food[this.state.index].id}`}>{this.state.food[this.state.index].name}</a></div>
-                <div className="food-address">{this.state.food[this.state.index].address}</div>
-                <div style={{marginTop: 8}}>{tags}</div>
+                {appends}
                 <Button style={{marginTop: 16}} type="primary" onClick={this.handleButtonClick.bind(this)}>{buttonText}</Button>
             </div>
         </Card>
@@ -127,8 +132,22 @@ export default class FoodPannel extends React.Component {
                 });
             }, (wtf) => {
                 console.log(wtf);
+                this.error(wtf.message);
                 this.setState({loading: false});
             }, getOptions);
         }
     }
+
+    error(message) {
+        Modal.error({
+            title: '定位出现异常',
+            content: (
+                <div>
+                    <p>{message}</p>
+                </div>
+            ),
+            onOk() {},
+        });
+    }
+
 }
