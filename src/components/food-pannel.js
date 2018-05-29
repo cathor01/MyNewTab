@@ -23,7 +23,7 @@ export default class FoodPannel extends React.Component {
 
     changeNextIndex () {
         if (this.state.runningRandom) {
-            this.setState({index: (this.state.index + 1) % this.state.food.length});
+            this.setState({index: Math.floor(Math.random() * this.state.food.length)});
             setTimeout(this.changeNextIndex.bind(this), 50);
         }
     }
