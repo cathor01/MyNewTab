@@ -122,6 +122,10 @@ export default class FoodPannel extends React.Component {
                             food.push({"name": content[i].name, "address": content[i].address, "type": content[i].type, id: content[i].id});
                         }
 
+                        if (food.length === 0) {
+                            food.push({"name": "暂无数据", "address": "", type: "", id: -1})
+                        }
+
                         console.log(content);
 
                         this.setState({food: food});
